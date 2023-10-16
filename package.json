@@ -1,6 +1,6 @@
 {
   "name": "crop-screenshot",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "type": "module",
   "description": "A library mate to take a screenshot of the screen of any website, restricted only to what is contained in the DOM. It works as a crop tool.",
   "main": "index.ts",
@@ -10,6 +10,9 @@
   "author": "Rafael Cavalcante Torres",
   "license": "MIT",
   "devDependencies": {
+    "@babel/core": "^7.23.2",
+    "@babel/plugin-transform-modules-commonjs": "^7.23.0",
+    "@babel/preset-env": "^7.23.2",
     "typescript": "^5.2.2"
   },
   "dependencies": {
