@@ -2,7 +2,7 @@ import html2canvas from "html2canvas";
 import { CONSTANTS, DEFAULTS } from "./constants";
 import { HandlePrintScreen } from "./types";
 
-async function handlePrintScreen(props: HandlePrintScreen): Promise<string> {
+export async function handlePrintScreen(props: HandlePrintScreen): Promise<string> {
     let isDragging = false;
     let initX = 0;
     let initY = 0;
@@ -110,5 +110,3 @@ async function handlePrintScreen(props: HandlePrintScreen): Promise<string> {
 
     return base64PrintScreen;
 }
-
-export { handlePrintScreen };
