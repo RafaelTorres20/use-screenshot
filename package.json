@@ -3,7 +3,13 @@
   "version": "1.0.7",
   "type": "module",
   "description": "A library mate to take a screenshot of the screen of any website, restricted only to what is contained in the DOM. It works as a crop tool.",
-  "main": "index.ts",
+  "main": "dist/index.js",
+  "module": "dist/index.es.js",
+  "jsnext:main": "dist/index.es.js",
+  "engines": {
+    "node": ">=8",
+    "npm": ">=5"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
