@@ -110,21 +110,7 @@ export async function handlePrintScreen(props: HandlePrintScreen): Promise<strin
 
     return base64PrintScreen;
 }
-
-export async function printComponent(props: HandlePrintScreen): Promise<string> {
-    let base64PrintScreen = "";
-    const root = document.getElementById(props.rootElementID) as HTMLElement;
-    const rootCanvas = await html2canvas(root, DEFAULTS);
-    const dataURL = rootCanvas.toDataURL("image/png", 1.0);
-    const image = new Image();
-    image.src = dataURL;
-    base64PrintScreen = dataURL;
-    props.copyToClipboard && navigator.clipboard.writeText(image.src);
-
-    return base64PrintScreen;
-}
-
-export async function printComponentWithDrawImage(props: HandlePrintScreen): Promise<string> {
+export async function print(props: HandlePrintScreen): Promise<string> {
     const root = document.getElementById(props.rootElementID) as HTMLElement;
     const rootCanvas = await html2canvas(root, DEFAULTS);
     const printContext = rootCanvas.getContext("2d") as CanvasRenderingContext2D;
@@ -143,6 +129,19 @@ export async function printComponentWithDrawImage(props: HandlePrintScreen): Pro
     const image = new Image();
     image.src = dataURL;
     const base64PrintScreen = dataURL;
+    props.copyToClipboard && navigator.clipboard.writeText(image.src);
+
+    return base64PrintScreen;
+}
+
+export async function printComponent(props: HandlePrintScreen): Promise<string> {
+    let base64PrintScreen = "";
+    const root = document.getElementById(props.rootElementID) as HTMLElement;
+    const rootCanvas = await html2canvas(root, DEFAULTS);
+    const dataURL = rootCanvas.toDataURL("image/png", 1.0);
+    const image = new Image();
+    image.src = dataURL;
+    base64PrintScreen = dataURL;
     props.copyToClipboard && navigator.clipboard.writeText(image.src);
 
     return base64PrintScreen;
