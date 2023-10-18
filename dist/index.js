@@ -115,7 +115,19 @@ async function handlePrintScreen(props) {
   });
   return base64PrintScreen;
 }
+async function printComponent(props) {
+  let base64PrintScreen = "";
+  const root = document.getElementById(props.rootElementID);
+  const rootCanvas = await html2canvas(root, DEFAULTS);
+  const dataURL = rootCanvas.toDataURL("image/png", 1);
+  const image = new Image();
+  image.src = dataURL;
+  base64PrintScreen = dataURL;
+  props.copyToClipboard && navigator.clipboard.writeText(image.src);
+  return base64PrintScreen;
+}
 export {
-  handlePrintScreen
+  handlePrintScreen,
+  printComponent
 };
 //# sourceMappingURL=index.js.map

@@ -30,7 +30,8 @@ var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: tru
 // index.ts
 var useScreenchot_exports = {};
 __export(useScreenchot_exports, {
-  handlePrintScreen: () => handlePrintScreen
+  handlePrintScreen: () => handlePrintScreen,
+  printComponent: () => printComponent
 });
 module.exports = __toCommonJS(useScreenchot_exports);
 var import_html2canvas = __toESM(require("html2canvas"), 1);
@@ -149,8 +150,20 @@ async function handlePrintScreen(props) {
   });
   return base64PrintScreen;
 }
+async function printComponent(props) {
+  let base64PrintScreen = "";
+  const root = document.getElementById(props.rootElementID);
+  const rootCanvas = await (0, import_html2canvas.default)(root, DEFAULTS);
+  const dataURL = rootCanvas.toDataURL("image/png", 1);
+  const image = new Image();
+  image.src = dataURL;
+  base64PrintScreen = dataURL;
+  props.copyToClipboard && navigator.clipboard.writeText(image.src);
+  return base64PrintScreen;
+}
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
-  handlePrintScreen
+  handlePrintScreen,
+  printComponent
 });
 //# sourceMappingURL=index.cjs.map

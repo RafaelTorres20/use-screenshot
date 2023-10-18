@@ -110,3 +110,16 @@ export async function handlePrintScreen(props: HandlePrintScreen): Promise<strin
 
     return base64PrintScreen;
 }
+
+export async function printComponent(props: HandlePrintScreen): Promise<string> {
+    let base64PrintScreen = "";
+    const root = document.getElementById(props.rootElementID) as HTMLElement;
+    const rootCanvas = await html2canvas(root, DEFAULTS);
+    const dataURL = rootCanvas.toDataURL("image/png", 1.0);
+    const image = new Image();
+    image.src = dataURL;
+    base64PrintScreen = dataURL;
+    props.copyToClipboard && navigator.clipboard.writeText(image.src);
+
+    return base64PrintScreen;
+}
