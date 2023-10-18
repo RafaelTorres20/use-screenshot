@@ -45,5 +45,6 @@ type HandlePrintScreen = {
 
 declare function handlePrintScreen(props: HandlePrintScreen): Promise<string>;
 declare function printComponent(props: HandlePrintScreen): Promise<string>;
+declare function printComponentWithDrawImage(props: HandlePrintScreen): Promise<string>;
 
-export { handlePrintScreen, printComponent };
+export { handlePrintScreen, printComponent, printComponentWithDrawImage };

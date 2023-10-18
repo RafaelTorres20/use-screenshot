@@ -126,8 +126,31 @@ async function printComponent(props) {
   props.copyToClipboard && navigator.clipboard.writeText(image.src);
   return base64PrintScreen;
 }
+async function printComponentWithDrawImage(props) {
+  const root = document.getElementById(props.rootElementID);
+  const rootCanvas = await html2canvas(root, DEFAULTS);
+  const printContext = rootCanvas.getContext("2d");
+  printContext.drawImage(
+    rootCanvas,
+    0,
+    0,
+    rootCanvas.width,
+    rootCanvas.height,
+    0,
+    0,
+    rootCanvas.width,
+    rootCanvas.height
+  );
+  const dataURL = printContext.canvas.toDataURL("image/png", 1);
+  const image = new Image();
+  image.src = dataURL;
+  const base64PrintScreen = dataURL;
+  props.copyToClipboard && navigator.clipboard.writeText(image.src);
+  return base64PrintScreen;
+}
 export {
   handlePrintScreen,
-  printComponent
+  printComponent,
+  printComponentWithDrawImage
 };
 //# sourceMappingURL=index.js.map
