@@ -123,3 +123,27 @@ export async function printComponent(props: HandlePrintScreen): Promise<string> 
 
     return base64PrintScreen;
 }
+
+export async function printComponentWithDrawImage(props: HandlePrintScreen): Promise<string> {
+    const root = document.getElementById(props.rootElementID) as HTMLElement;
+    const rootCanvas = await html2canvas(root, DEFAULTS);
+    const printContext = rootCanvas.getContext("2d") as CanvasRenderingContext2D;
+    printContext.drawImage(
+        rootCanvas,
+        0,
+        0,
+        rootCanvas.width,
+        rootCanvas.height,
+        0,
+        0,
+        rootCanvas.width,
+        rootCanvas.height
+    );
+    const dataURL = printContext.canvas.toDataURL("image/png", 1.0);
+    const image = new Image();
+    image.src = dataURL;
+    const base64PrintScreen = dataURL;
+    props.copyToClipboard && navigator.clipboard.writeText(image.src);
+
+    return base64PrintScreen;
+}
